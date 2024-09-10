@@ -1,0 +1,25 @@
+services:
+
+  storage_redis:
+    image: redis:latest
+    container_name: redis_test_task
+    volumes:
+      - ./redis_storage:/data
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+    restart: always
+
+  backend:
+    container_name: backend_test_task
+    build: .
+    image: "personal_data_backend"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - storage_redis
+    restart: always

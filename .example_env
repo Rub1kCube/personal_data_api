@@ -1,0 +1,7 @@
+# REDIS_MAIN_DSN="redis://storage_redis/0"  # For docker container
+REDIS_MAIN_DSN="redis://0.0.0.0:6379/0"
+
+TITLE_APP="dev_backend"
+PORT=5000
+HOST=0.0.0.0
+LOGGING_LEVEL="DEBUG"

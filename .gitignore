@@ -1,0 +1,15 @@
+__pycache__/
+
+__pypackages__/
+
+# Environments
+.env
+.test_env
+.prod_env
+.dev_env
+
+.idea/
+.vscode/
+
+# Volumes Docker container Redis
+redis_storage
