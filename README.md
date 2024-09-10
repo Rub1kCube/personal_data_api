@@ -19,11 +19,11 @@
 ## Запуск проекта
 
 - Запуск через Docker:
-  - ``makefile full_build_backend``;
+  - ``make full_build_backend``;
 - Запуск локально:
   - ``poetry install``;
   - Далее вам нужно подключиться к Redis на вашем компьютере или к удаленному;
-  - ``makefile start_backend_on_gunicorn``;
+  - ``make start_backend_on_gunicorn``;
 
 
 ## Использование
