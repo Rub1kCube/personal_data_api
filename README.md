@@ -30,3 +30,44 @@
 
 В документации FastAPI сказано, чтобы получить доступ к документации через Swagger вам требуется обратиться 
 по следующему пути `http://0.0.0.0:5000/docs`
+
+
+## Решение второго задания:
+При решении данной задачи я использовал PostgreSQL 14.3 с базовой конфигурацией
+
+**Вариант 1**
+```sql
+with temp_query as (
+    select
+        fn.name,
+        sn.status
+    from short_names sn
+    join full_names fn on sn.name = split_part(fn.name, '.', 1)::text
+)
+update full_names
+set status = temp_query.status
+from temp_query
+where temp_query.name = full_names.name;
+```
+**Вариант 2**
+```sql
+begin;
+with negative_status as (
+    select name
+    from short_names
+    where status = 0
+)
+update full_names set status = 0
+from negative_status ns
+where ns.name = split_part(full_names.name, '.', 1)::text;
+
+with positive_status as (
+    select name
+    from short_names
+    where status = 1
+)
+update full_names set status = 1
+from positive_status ps
+where ps.name = split_part(full_names.name, '.', 1)::text;
+commit;
+```
